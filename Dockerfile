@@ -8,3 +8,5 @@ RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft
 RUN apt-get update
 RUN apt-get install -y powershell
 RUN apt-get install -y libgdiplus
+
+RUN ln -s /lib/x86_64-linux-gnu/libc.so.6 /lib/x86_64-linux-gnu/ntdll.dll
