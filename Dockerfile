@@ -12,16 +12,8 @@ RUN apt-get install -y powershell
 RUN apt-get install -y libgdiplus
 
 # Install Tesseract
-RUN apt-get install -y tesseract-ocr
-# Set up Tesseract language data files
-RUN cd ~ && \
-    git clone git://github.com/tesseract-ocr/tessdata.git && \
-    cd tessdata/ && \
-    git checkout 3.04.00 && \
-    rm -rf .git && \
-    mv ./* /usr/share/tesseract-ocr/tessdata/ && \
-    cd .. && \
-    rm -rf tessdata/
+COPY scripts/tesseract.sh /root/tesseract.sh
+RUN /root/tesseract.sh
 
 # Create an ntdll symlink (yes, this is a hack)
 RUN ln -s /lib/x86_64-linux-gnu/libc.so.6 /lib/x86_64-linux-gnu/ntdll.dll
